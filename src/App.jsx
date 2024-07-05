@@ -11,7 +11,8 @@ function App() {
   const [currentId, setCurrentId] = useState(null);
 
   const addNewContact = (newContact) => {
-    setPeople([...people, newContact]);
+    const newArray = [...people, newContact];
+    setPeople(newArray);
   };
 
   useEffect(() => {
@@ -50,7 +51,9 @@ function App() {
         />
         <Route
           path="/add-new-contact"
-          element={<AddNewContact addNewContact={addNewContact} />}
+          element={
+            <AddNewContact people={people} addNewContact={addNewContact} />
+          }
         />
       </Routes>
     </div>
