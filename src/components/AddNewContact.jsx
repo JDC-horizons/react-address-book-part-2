@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 function AddNewContact(props) {
   const newContact = {
     firstName: null,
@@ -5,10 +7,23 @@ function AddNewContact(props) {
     street: null,
     city: null,
   };
+
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    newContact.id = props.people.length + 1;
-    props.addNewContact(newContact);
+    if (
+      newContact.firstName !== null &&
+      newContact.lastName !== null &&
+      newContact.street !== null &&
+      newContact.city !== null
+    ) {
+      newContact.id = props.people.length + 1;
+      props.addNewContact(newContact);
+      navigate("/contacts-list");
+    } else {
+      alert("Please enter information!");
+    }
   };
 
   return (
